@@ -1,13 +1,13 @@
-# Dyno The 2nd v1.5.1 — Railway Python Fix
+# Dyno The 2nd v1.5.2 — Railpack Fix
 
-Complete v1.5 bot plus Railway build configuration.
+Railway build logs confirmed Railpack 0.39.0, so nixpacks.toml was ignored.
 
-Upload ALL THREE of these replacement/config files to the GitHub repo root:
-- index.js
-- package.json
-- nixpacks.toml
+Upload ALL files in this ZIP to the repository root.
+The important new file is `Aptfile`, which requests:
+- python3
+- python3-pip
+- ffmpeg
 
-The new nixpacks.toml explicitly installs Node 24, Python 3, and FFmpeg in the Railway image.
-That fixes the `env: 'python3': No such file or directory` failure from youtube-dl-exec.
+The existing music backend remains yt-dlp + FFmpeg and the receptionist remains unchanged.
 
-Keep DISCORD_TOKEN in Railway Variables.
+After deploy, the build plan should include apt packages for Python/FFmpeg instead of only libatomic1.
