@@ -1,20 +1,20 @@
-# Dyno The 2nd v1.6.4 — REAL FFMPEG FIX
+# Dyno The 2nd v1.6.5 — AUDIO RESOURCE FIX
 
-The v1.6.3 log proved playback starts and then the audio resource ends after ~120 ms.
+This combines the verified-good v1.6.4 environment with the DSP bypass that was never actually tested on that environment.
 
-Discord Player's troubleshooting docs specifically identify this symptom with static FFmpeg binaries.
-This build removes `ffmpeg-static` completely and installs Debian's system FFmpeg in a Docker image.
+Verified from v1.6.4 logs:
+- real Debian FFmpeg: yes
+- ffmpeg-static: removed
+- DAVE: working
+- SoundCloud: correct track + stream
+- failure point: AudioResource/DSP path
 
-Upload ALL of these files to the repo root:
-- index.js
-- package.json
-- Dockerfile
-- .dockerignore
+v1.6.5 keeps system FFmpeg and disables all unnecessary Discord Player PCM/DSP transforms:
+- disableFilterer
+- disableBiquad
+- disableEqualizer
+- disableVolume
+- disableResampler
 
-Railway should detect the Dockerfile and build from it.
-
-Verify startup says:
-- dyno-the-2nd@1.6.4
-- Dyno The 2nd v1.6.4 online
-
-The dependency report should now show the system FFmpeg path `/usr/bin/ffmpeg`, NOT `/app/node_modules/ffmpeg-static/ffmpeg`.
+Upload ALL files to repo root.
+Startup must say 1.6.5.

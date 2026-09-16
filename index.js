@@ -55,7 +55,7 @@ const cmds=[
 ].map(x=>x.toJSON());
 
 client.once(Events.ClientReady,async x=>{
- console.log(`Dyno The 2nd v1.6.4 online as ${x.user.tag}`);
+ console.log(`Dyno The 2nd v1.6.5 online as ${x.user.tag}`);
  console.log(`Node ${process.version}`);
  console.log(player.scanDeps());
  await x.application.commands.set(cmds);console.log("Commands registered");
@@ -97,7 +97,12 @@ client.on(Events.InteractionCreate,async i=>{
         leaveOnEmptyCooldown:300000,
         leaveOnEnd:false,
         bufferingTimeout:15000,
-        connectionTimeout:15000
+        connectionTimeout:15000,
+        disableFilterer:true,
+        disableBiquad:true,
+        disableEqualizer:true,
+        disableVolume:true,
+        disableResampler:true
       },
       searchEngine:`ext:${SoundCloudExtractor.identifier}`
     });
