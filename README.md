@@ -1,13 +1,16 @@
-# Dyno The 2nd v1.6.2 — DSP HANG FIX
+# Dyno The 2nd v1.6.3 — DAVE FIX
 
-The v1.6.1 log identified the exact hang:
-`Initiating DSP filters pipeline...`
+The crash was explicit:
+`DAVE protocol support requires the @snazzah/davey package.`
 
-This build:
-- disables Discord Player's JS DSP/filterer pipeline entirely
-- disables unused equalizer, volume, biquad, and resampler processors
-- explicitly forces skipFFmpeg=false
-- explicitly passes the FFmpeg path to Discord Player
-- keeps SoundCloud extraction, voice, receptionist, and the 25-second safety timeout
+This build adds `@snazzah/davey` and pins the working Discord Player stack versions so `latest` cannot unexpectedly move them.
 
-Replace index.js and package.json in the repo root.
+Replace BOTH:
+- index.js
+- package.json
+
+Verify Railway startup says:
+- dyno-the-2nd@1.6.3
+- Dyno The 2nd v1.6.3 online
+
+If it says 1.6.1 or 1.6.2, Railway is running an older deployment.
