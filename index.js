@@ -4,10 +4,7 @@ import {
 } from "discord.js";
 import {Player,useQueue} from "discord-player";
 import {DefaultExtractors,SoundCloudExtractor} from "@discord-player/extractor";
-import ffmpegPath from "ffmpeg-static";
 import "dotenv/config";
-
-process.env.FFMPEG_PATH=ffmpegPath;
 
 const OWNER="1139989614103380131",TZ="America/Toronto",CD=300000;
 const SCHOOL={1:["09:15","16:30"],2:["09:15","16:30"],3:["09:45","16:30"],4:["09:15","16:30"],5:["09:15","16:30"]};
@@ -18,7 +15,10 @@ const client=new Client({intents:[
  GatewayIntentBits.Guilds,GatewayIntentBits.GuildMembers,GatewayIntentBits.GuildMessages,
  GatewayIntentBits.MessageContent,GatewayIntentBits.GuildVoiceStates
 ]});
-const player=new Player(client);
+const player=new Player(client,{
+  ffmpegPath:"/usr/bin/ffmpeg",
+  skipFFmpeg:false
+});
 await player.extractors.loadMulti(DefaultExtractors);
 
 function now(){let p=Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:TZ,weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts().map(x=>[x.type,x.value]));return{d:{Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[p.weekday],m:+p.hour*60 + +p.minute}}
@@ -55,7 +55,7 @@ const cmds=[
 ].map(x=>x.toJSON());
 
 client.once(Events.ClientReady,async x=>{
- console.log(`Dyno The 2nd v1.6.3 online as ${x.user.tag}`);
+ console.log(`Dyno The 2nd v1.6.4 online as ${x.user.tag}`);
  console.log(`Node ${process.version}`);
  console.log(player.scanDeps());
  await x.application.commands.set(cmds);console.log("Commands registered");
