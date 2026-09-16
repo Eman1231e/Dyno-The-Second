@@ -1,6 +1,6 @@
 {
   "name": "dyno-the-2nd",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Dyno The 2nd - Dyno's personal Tampa bot",
   "main": "index.js",
   "type": "module",
