@@ -1,7 +1,6 @@
 {
   "name": "dyno-the-2nd",
-  "version": "1.4.0",
-  "description": "Dyno The 2nd",
+  "version": "1.5.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -13,7 +12,7 @@
     "dotenv": "^17.2.2",
     "ffmpeg-static": "^5.2.0",
     "opusscript": "^0.1.1",
-    "play-dl": "^1.9.7"
+    "youtube-dl-exec": "^3.0.20"
   },
   "engines": {
     "node": ">=24.17.0"
