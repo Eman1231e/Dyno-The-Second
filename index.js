@@ -18,7 +18,7 @@ const client=new Client({intents:[
  GatewayIntentBits.Guilds,GatewayIntentBits.GuildMembers,GatewayIntentBits.GuildMessages,
  GatewayIntentBits.MessageContent,GatewayIntentBits.GuildVoiceStates
 ]});
-const player=new Player(client);
+const player=new Player(client,{skipFFmpeg:false,ffmpegPath});
 await player.extractors.loadMulti(DefaultExtractors);
 
 function now(){let p=Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:TZ,weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts().map(x=>[x.type,x.value]));return{d:{Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[p.weekday],m:+p.hour*60 + +p.minute}}
@@ -55,7 +55,7 @@ const cmds=[
 ].map(x=>x.toJSON());
 
 client.once(Events.ClientReady,async x=>{
- console.log(`Dyno The 2nd v1.6.1 online as ${x.user.tag}`);
+ console.log(`Dyno The 2nd v1.6.2 online as ${x.user.tag}`);
  console.log(`Node ${process.version}`);
  console.log(player.scanDeps());
  await x.application.commands.set(cmds);console.log("Commands registered");
@@ -97,7 +97,12 @@ client.on(Events.InteractionCreate,async i=>{
         leaveOnEmptyCooldown:300000,
         leaveOnEnd:false,
         bufferingTimeout:15000,
-        connectionTimeout:15000
+        connectionTimeout:15000,
+        disableFilterer:true,
+        disableBiquad:true,
+        disableEqualizer:true,
+        disableVolume:true,
+        disableResampler:true
       },
       searchEngine:`ext:${SoundCloudExtractor.identifier}`
     });

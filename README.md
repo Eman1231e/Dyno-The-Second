@@ -1,11 +1,13 @@
-# Dyno The 2nd v1.6.1
+# Dyno The 2nd v1.6.2 — DSP HANG FIX
 
-Targeted audio-pipeline patch:
-- explicitly installs mediaplex (Discord Player's recommended Opus backend)
-- preserves SoundCloud search/streaming
-- adds 15s buffering/connection limits
-- adds a hard 25s command timeout so /play cannot spin forever
-- receptionist/school logic unchanged
+The v1.6.1 log identified the exact hang:
+`Initiating DSP filters pipeline...`
 
-Replace index.js and package.json.
-Delete old Aptfile/nixpacks.toml if still present.
+This build:
+- disables Discord Player's JS DSP/filterer pipeline entirely
+- disables unused equalizer, volume, biquad, and resampler processors
+- explicitly forces skipFFmpeg=false
+- explicitly passes the FFmpeg path to Discord Player
+- keeps SoundCloud extraction, voice, receptionist, and the 25-second safety timeout
+
+Replace index.js and package.json in the repo root.

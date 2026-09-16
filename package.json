@@ -1,6 +1,6 @@
 {
   "name": "dyno-the-2nd",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "main": "index.js",
   "type": "module",
   "scripts": {
