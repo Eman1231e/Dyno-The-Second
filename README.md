@@ -1,13 +1,10 @@
-# Dyno The 2nd v1.5.2 — Railpack Fix
+# Dyno The 2nd v1.6 — NO PYTHON
 
-Railway build logs confirmed Railpack 0.39.0, so nixpacks.toml was ignored.
+This build removes the entire YouTube/yt-dlp/Python chain.
 
-Upload ALL files in this ZIP to the repository root.
-The important new file is `Aptfile`, which requests:
-- python3
-- python3-pip
-- ffmpeg
+Music now uses Discord Player v7 and its official SoundCloud extractor:
+song name -> SoundCloud search -> stream -> Discord.
 
-The existing music backend remains yt-dlp + FFmpeg and the receptionist remains unchanged.
-
-After deploy, the build plan should include apt packages for Python/FFmpeg instead of only libatomic1.
+Upload index.js + package.json to the repo root.
+DELETE Aptfile and nixpacks.toml from the repo; they are no longer needed.
+No new Railway variables are required.
