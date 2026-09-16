@@ -1,6 +1,6 @@
 {
   "name": "dyno-the-2nd",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -11,7 +11,8 @@
     "discord-player": "latest",
     "discord.js": "^14.22.1",
     "dotenv": "^17.2.2",
-    "ffmpeg-static": "^5.2.0"
+    "ffmpeg-static": "^5.2.0",
+    "mediaplex": "^1.0.0"
   },
   "engines": {
     "node": ">=24.17.0"

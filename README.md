@@ -1,10 +1,11 @@
-# Dyno The 2nd v1.6 — NO PYTHON
+# Dyno The 2nd v1.6.1
 
-This build removes the entire YouTube/yt-dlp/Python chain.
+Targeted audio-pipeline patch:
+- explicitly installs mediaplex (Discord Player's recommended Opus backend)
+- preserves SoundCloud search/streaming
+- adds 15s buffering/connection limits
+- adds a hard 25s command timeout so /play cannot spin forever
+- receptionist/school logic unchanged
 
-Music now uses Discord Player v7 and its official SoundCloud extractor:
-song name -> SoundCloud search -> stream -> Discord.
-
-Upload index.js + package.json to the repo root.
-DELETE Aptfile and nixpacks.toml from the repo; they are no longer needed.
-No new Railway variables are required.
+Replace index.js and package.json.
+Delete old Aptfile/nixpacks.toml if still present.

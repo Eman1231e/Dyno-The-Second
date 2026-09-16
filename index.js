@@ -55,7 +55,7 @@ const cmds=[
 ].map(x=>x.toJSON());
 
 client.once(Events.ClientReady,async x=>{
- console.log(`Dyno The 2nd v1.6.0 online as ${x.user.tag}`);
+ console.log(`Dyno The 2nd v1.6.1 online as ${x.user.tag}`);
  console.log(`Node ${process.version}`);
  console.log(player.scanDeps());
  await x.application.commands.set(cmds);console.log("Commands registered");
@@ -89,11 +89,20 @@ client.on(Events.InteractionCreate,async i=>{
    try{
     const query=i.options.getString("query",true);
     // Deliberately force the official SoundCloud extractor. No YouTube, yt-dlp or Python.
-    const result=await player.play(vc,query,{
+    const playPromise=player.play(vc,query,{
       requestedBy:i.user,
-      nodeOptions:{metadata:{channel:i.channel},leaveOnEmpty:true,leaveOnEmptyCooldown:300000,leaveOnEnd:false},
+      nodeOptions:{
+        metadata:{channel:i.channel},
+        leaveOnEmpty:true,
+        leaveOnEmptyCooldown:300000,
+        leaveOnEnd:false,
+        bufferingTimeout:15000,
+        connectionTimeout:15000
+      },
       searchEngine:`ext:${SoundCloudExtractor.identifier}`
     });
+    const timeoutPromise=new Promise((_,reject)=>setTimeout(()=>reject(new Error("Audio pipeline timed out after 25 seconds.")),25000));
+    const result=await Promise.race([playPromise,timeoutPromise]);
     await i.editReply(`▶️ ${result.track.title}`);
    }catch(e){
     console.error("[PLAY ERROR]",e);
