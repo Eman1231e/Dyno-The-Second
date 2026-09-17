@@ -55,7 +55,7 @@ const cmds=[
 ].map(x=>x.toJSON());
 
 client.once(Events.ClientReady,async x=>{
- console.log(`Dyno The 2nd v1.6.5 online as ${x.user.tag}`);
+ console.log(`Dyno The 2nd v1.6.6 online as ${x.user.tag}`);
  console.log(`Node ${process.version}`);
  console.log(player.scanDeps());
  await x.application.commands.set(cmds);console.log("Commands registered");
@@ -64,6 +64,11 @@ client.once(Events.ClientReady,async x=>{
 client.on(Events.MessageCreate,async m=>{
  if(m.author.bot||m.mentions.everyone||m.type===19)return;
  if(!new RegExp(`<@!?${OWNER}>`).test(m.content))return;
+ // VIP receptionist overrides
+ if(m.author.id==="1321552389957877840")
+  return void await m.reply("Alex, please stop pinging Dyno. The server has enough load as it is. 💀");
+ if(m.author.id==="1004078630353240186")
+  return void await m.reply("Your Majesty, King Onyx. 👑 Dyno has received your royal summons. Please refrain from summoning him again before I have you removed from the kingdom. 😭");
  if(m.author.id===OWNER)return void await m.reply("Sir... that's literally you. 😭");
  let l=cds.get(m.author.id)||0;if(Date.now()-l<CD)return;cds.set(m.author.id,Date.now());
  await m.reply(receptionist());
